@@ -1,0 +1,25 @@
+from tkinter import *
+giraffe=Tk()
+giraffe.title("CATS GO MEOW")
+giraffe.geometry("1000x800")
+
+def SHRIMPS():
+
+
+
+def frogs():
+    global Sliderr
+    wolf = Canvas(giraffe, bg="white", height=900, width=700)
+    wolf.place(x=0, y=0)
+    giraffecirlcle=wolf.create_oval(100, 120, 50, 20, fill="Red",)
+    Sliderr = Scale (giraffe, bg="Black", from_=0, to=5, command=SHRIMPS)
+    Sliderr.place(x=100, y=700)
+    Sliderr.set (0)
+    print (Sliderr.get ())
+
+
+Tiggersbutton=Button(giraffe, bg="blue", command=frogs)
+Tiggersbutton.place(x=2, y=2)
+donkeyponkey=Label(giraffe, text="COOL FOR U 2 DUDE")
+donkeyponkey.place(x=3, y=5)
+giraffe.mainloop()
