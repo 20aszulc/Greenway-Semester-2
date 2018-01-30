@@ -23,3 +23,28 @@ Tiggersbutton.place(x=2, y=2)
 donkeyponkey=Label(giraffe, text="COOL FOR U 2 DUDE")
 donkeyponkey.place(x=3, y=5)
 giraffe.mainloop()
+
+from Tkinter import *
+giraffe=Tk()
+giraffe.title("CATS GO MEOW")
+giraffe.geometry("1000x800")
+doggie=100
+
+def SHRIMPS(event):
+    doggie=Sliderr.get()
+    wolf.coords(giraffecirlcle,100 - doggie,100 -  doggie, 100+doggie, 100+doggie, )
+
+
+wolf = Canvas(giraffe, bg="white", height=900, width=700)
+wolf.place(x=0, y=0)
+Sliderr = Scale (giraffe, bg="Black", from_=1, to=500, command = SHRIMPS)
+Sliderr.place(x=100, y=700)
+print (Sliderr.get ())
+
+giraffecirlcle = wolf.create_oval(100 - doggie,100 -  doggie, 100+doggie, 100+doggie, fill="Red",)
+
+Tiggersbutton=Button(giraffe, bg="blue",)
+Tiggersbutton.place(x=2, y=2)
+donkeyponkey=Label(giraffe, text="COOL FOR U 2 DUDE")
+donkeyponkey.place(x=3, y=5)
+giraffe.mainloop()
