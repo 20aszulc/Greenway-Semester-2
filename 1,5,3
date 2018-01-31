@@ -1,50 +1,77 @@
+import random
 from tkinter import *
+import time
 giraffe=Tk()
 giraffe.title("CATS GO MEOW")
-giraffe.geometry("1000x800")
+xgiraffe=1000
+ygiraffe=1000
+giraffe.minsize(xgiraffe,ygiraffe)
+doggie=1
+frog=0
+mouse1=0
+mouse2=0
+gerbals=0
 
-def SHRIMPS():
+wolf = Canvas (giraffe, bg="white", height=xgiraffe, width=ygiraffe)
+Sliderr = Scale (giraffe, bg="Black",)
 
+def SHRIMPS(event):
+    global wolf, Sliderr, giraffecirlcle
+    print (Sliderr.get ())
+    doggie = Sliderr.get ()
+    if doggie >= 500:
+        colordegiraffe="Red"
+    elif doggie <=500:
+        colordegiraffe="Green"
+    giraffecirlcle = wolf.create_oval (xgiraffe-doggie, ygiraffe-doggie, doggie, doggie, fill=colordegiraffe, )
+
+def hello():
+    global gerbals
+    gerbals=gerbals+1
+
+def elephant(event):
+    mouse1=event.x
+    mouse2=event.y
+    elephantsize=10
+    if gerbals<6:
+        wolf.create_oval(mouse1+elephantsize, mouse2+elephantsize, mouse1-elephantsize, mouse2-elephantsize, fill="Purple",)
+        hello()
+wolf.bind("<Button-1>", elephant)
+
+
+def horses():
+    global wolf, giraffecirlcle, Sliderr
+
+    wolf.place (x=0, y=0)
+    giraffecirlcle = wolf.create_oval (xgiraffe, ygiraffe, doggie, doggie, fill="Red", )
+    Sliderr = Scale (giraffe, bg="Black", from_=1, to=1000, length= ygiraffe-20, command=SHRIMPS)
+    Sliderr.place (x=10, y=10)
+    evilsquares ()
+
+def evilsquares():
+    if frog==0:
+        seconds=random.randint(1,7)
+        time.sleep(seconds)
+    if frog==1:
+        flyingy=0
+        flyingx=random.randint(1, 999)
+        wolf.create_rectangle(flyingx+30, flyingy+30, flyingx-30, flyingy-30, fill="Green")
+        flyingy=flyingy+10
+        evilsquares()
 
 
 def frogs():
-    global Sliderr
-    wolf = Canvas(giraffe, bg="white", height=900, width=700)
-    wolf.place(x=0, y=0)
-    giraffecirlcle=wolf.create_oval(100, 120, 50, 20, fill="Red",)
-    Sliderr = Scale (giraffe, bg="Black", from_=0, to=5, command=SHRIMPS)
-    Sliderr.place(x=100, y=700)
-    Sliderr.set (0)
-    print (Sliderr.get ())
+    global frog
+    frog=1
+    Tiggersbutton.place_forget()
+    donkeyponkey.place_forget()
+    horses()
 
+sizebutton=30
+Tiggersbutton=Button(giraffe, bg="blue", command=frogs, height=sizebutton, width=sizebutton*2)
+Tiggersbutton.place(x=xgiraffe/3, y=ygiraffe/3)
+donkeyponkey=Label(giraffe, text="CIRCLE ATTACK",)
+donkeyponkey.place(x=xgiraffe/3+150, y=ygiraffe/3+200)
+print(frog)
 
-Tiggersbutton=Button(giraffe, bg="blue", command=frogs)
-Tiggersbutton.place(x=2, y=2)
-donkeyponkey=Label(giraffe, text="COOL FOR U 2 DUDE")
-donkeyponkey.place(x=3, y=5)
-giraffe.mainloop()
-
-from Tkinter import *
-giraffe=Tk()
-giraffe.title("CATS GO MEOW")
-giraffe.geometry("1000x800")
-doggie=100
-
-def SHRIMPS(event):
-    doggie=Sliderr.get()
-    wolf.coords(giraffecirlcle,100 - doggie,100 -  doggie, 100+doggie, 100+doggie, )
-
-
-wolf = Canvas(giraffe, bg="white", height=900, width=700)
-wolf.place(x=0, y=0)
-Sliderr = Scale (giraffe, bg="Black", from_=1, to=500, command = SHRIMPS)
-Sliderr.place(x=100, y=700)
-print (Sliderr.get ())
-
-giraffecirlcle = wolf.create_oval(100 - doggie,100 -  doggie, 100+doggie, 100+doggie, fill="Red",)
-
-Tiggersbutton=Button(giraffe, bg="blue",)
-Tiggersbutton.place(x=2, y=2)
-donkeyponkey=Label(giraffe, text="COOL FOR U 2 DUDE")
-donkeyponkey.place(x=3, y=5)
 giraffe.mainloop()
