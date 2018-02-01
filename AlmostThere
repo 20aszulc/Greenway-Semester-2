@@ -1,0 +1,103 @@
+
+import random
+from tkinter import *
+import time
+giraffe=Tk()
+giraffe.title("CATS GO MEOW")
+xgiraffe=1000
+ygiraffe=1000
+giraffe.minsize(xgiraffe,ygiraffe)
+doggie=1
+frog=0
+mouse1=0
+mouse2=0
+gerbils=0
+
+wolf = Canvas (giraffe, bg="white", height=xgiraffe, width=ygiraffe)
+Sliderr = Scale (giraffe, bg="Black",)
+
+def SHRIMPS(event):
+    global wolf, Sliderr, giraffecirlcle
+    print (Sliderr.get ())
+    doggie = Sliderr.get ()
+    if doggie >= 500:
+        colordegiraffe="Red"
+    elif doggie <=500:
+        colordegiraffe="Green"
+    HillaryClinton=0 #how many times she won the presidential election
+    giraffecirlcle = wolf.create_oval (xgiraffe-doggie, ygiraffe-doggie, doggie, doggie, fill=colordegiraffe, )
+
+def hello():
+    global gerbils
+    gerbils=gerbils+1
+
+def elephant(event):
+    mouse1=event.x
+    mouse2=event.y
+    elephantsize=10
+    if gerbils<6:
+        wolf.create_oval(mouse1+elephantsize, mouse2+elephantsize, mouse1-elephantsize, mouse2-elephantsize, fill="Purple",)
+        hello()
+wolf.bind("<Button-1>", elephant)
+
+def horses():
+    global wolf, giraffecirlcle, Sliderr
+
+    wolf.place (x=0, y=0)
+    giraffecirlcle = wolf.create_oval (xgiraffe, ygiraffe, doggie, doggie, fill="Red", )
+    Sliderr = Scale (giraffe, bg="Black", from_=1, to=1000, length= ygiraffe-20, command=SHRIMPS)
+    Sliderr.place (x=10, y=10)
+
+def evilsquaressetup():
+    global flyingy, flyingx, frog
+    flyingy=0
+    flyingx=random.randint(1, 999)
+
+
+def evilsquares(): #replace animation
+    time.sleep (.005)
+    global flyingy, flyingx, frog
+    if frog!=0 and frog<=5:
+        queensofneworleans=wolf.create_rectangle(flyingx+30, flyingy+30, flyingx-30, flyingy-30, fill="Green")
+        #wolf.move(queensofneworleans, flyingx, flyingy)
+        flyingy=flyingy+10
+        print(flyingy)
+        time.sleep (.005)
+        #wolf.update_idletasks ()
+        giraffe.update()
+        wolf.delete (queensofneworleans)
+        if flyingy>=ygiraffe:
+            flyingy=0
+            frog = frog + 1
+            evilsquaressetup()
+            evilsquares()
+        wolf.after (10, evilsquares ())
+
+
+
+convert= int("0xff", 16)
+print(convert+11111)
+a=21
+b=hex(a)
+print(a+11111)
+
+
+def frogs():
+    global frog
+    frog=1
+    Tiggersbutton.place_forget()
+    donkeyponkey.place_forget()
+    horses()
+    if frog==1:
+        evilsquaressetup()
+        evilsquares()
+        print (frog)
+
+sizebutton=30
+Tiggersbutton=Button(giraffe, bg="blue", command=frogs, height=sizebutton, width=sizebutton*2)
+Tiggersbutton.place(x=xgiraffe/3, y=ygiraffe/3)
+donkeyponkey=Label(giraffe, text="CIRCLE ATTACK",)
+donkeyponkey.place(x=xgiraffe/3+150, y=ygiraffe/3+200)
+
+
+giraffe.mainloop()
