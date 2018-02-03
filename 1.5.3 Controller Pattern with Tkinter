@@ -1,0 +1,139 @@
+import random
+from tkinter import *
+import time
+
+giraffe = Tk ()
+giraffe.title ("CATS GO MEOW")
+xgiraffe = 1000
+ygiraffe = 1000
+giraffe.minsize (xgiraffe, ygiraffe)
+doggie = 1
+frog = 0
+mouse1 = 0
+mouse2 = 0
+gerbils = 0
+loserpoints = 0
+winnerpoint = 0
+initiatetracker=0
+color='#7f0e36'
+flyingy = 0
+flyingx = random.randint (1, 999)
+
+
+a = random.randint(1, 255)
+b = hex (a)
+
+wolf = Canvas (giraffe, bg="white", height=xgiraffe, width=ygiraffe)
+Sliderr = Scale (giraffe, bg="Black", )
+Instructions = Label (giraffe,
+                      text="Don't let the squares escape: Use your slider to stop the squares from moving, as you "
+                           "\n create larger circle that make the squares afraid and freeze/hide. Then use your mouse to "
+                           "\n have your purple small circles kill the evil squares by clicking on them. You lose "
+                           "\n lives everytime a square passes")
+Instructions.place (x=300, y=850)
+tracker = Label (wolf, text="Points: " + str(winnerpoint) + " Lives left: " + str(loserpoints))
+tracker.place (x=40, y=20)
+
+
+def SHRIMPS(event):
+    global wolf, Sliderr, giraffecirlcle
+    if loserpoints < 500:
+        print (Sliderr.get ())
+        doggie = Sliderr.get ()
+        if doggie >= 500:
+            colordegiraffe = "cyan3"
+        elif doggie <= 500:
+            colordegiraffe = "VioletRed"
+        giraffecirlcle = wolf.create_oval (xgiraffe - doggie, ygiraffe - doggie, doggie, doggie, fill=colordegiraffe, )
+
+
+def hello():
+    global gerbils, attacker,color
+    gerbils = gerbils + 1
+    if gerbils==2:
+        color = ("#%03x" % random.randint (0,0xFFF))
+        # https://stackoverflow.com/questions/13998901/generating-a-random-hex-color-in-python/18035471
+        gerbils=0
+
+
+def elephant(event):
+    global x1, x2, y1, y2,  initiatetracker, color, winnerpoint, loserpoints, tracker
+    initiatetracker=1
+    mouse1 = event.x
+    mouse2 = event.y
+    elephantsize = 10
+    if gerbils < 2:
+        attackers=wolf.create_oval (mouse1 + elephantsize, mouse2 + elephantsize, mouse1 - elephantsize, mouse2 - elephantsize,
+                          fill=color, )
+        x1, y1, x2, y2 = wolf.coords (attackers)
+    if flyingx + 100 > mouse1 > flyingx - 100 and flyingy - 101 < mouse2 < flyingy + 101:
+        winnerpoint = winnerpoint + 1
+        loserpoints = loserpoints + 1
+        tracker.place_forget ()
+        tracker = Label (wolf, text="Points: " + str (winnerpoint) + " Lives left: " + str (loserpoints + 500))
+        tracker.place (x=40, y=20)
+        print ("winnerpoint")
+    hello ()
+
+wolf.bind ("<Button-1>", elephant)
+
+def horses():
+    global wolf, giraffecirlcle, Sliderr
+
+    wolf.place (x=0, y=0)
+    giraffecirlcle = wolf.create_oval (xgiraffe, ygiraffe, doggie, doggie, fill="Red", )
+    Sliderr = Scale (giraffe, bg="Black", from_=1, to=1000, length=ygiraffe - 20, command=SHRIMPS)
+    Sliderr.place (x=10, y=10)
+
+
+def evilsquaressetup():
+    global flyingy, flyingx, frog
+    flyingy = 0
+    flyingx = random.randint (1, 999)
+
+
+def evilsquares():  # replace animation
+    time.sleep (.005)
+    global flyingy, flyingx, frog, loserpoints,  queensofneworleans
+    while frog != 0 and loserpoints > -500:
+        queensofneworleans = wolf.create_rectangle (flyingx + 100, flyingy + 100, flyingx - 100, flyingy - 100,
+                                                    fill="Green")
+        # wolf.move(queensofneworleans, flyingx, flyingy)
+        flyingy = flyingy + 10
+        time.sleep (.01)
+        # wolf.update_idletasks ()
+        giraffe.update ()
+        wolf.delete (queensofneworleans)
+        if flyingy >= ygiraffe:
+            loserpoints = loserpoints - 1
+            flyingy = 0
+            frog = frog + 1
+            evilsquaressetup ()
+            evilsquares ()
+        #wolf.after (10, evilsquares ())
+
+
+if loserpoints == -500:
+    print ("Loser")
+
+if winnerpoint == 100:
+    print ("You won!")
+
+def frogs():
+    global frog
+    frog = 1
+    Tiggersbutton.place_forget ()
+    donkeyponkey.place_forget ()
+    Instructions.place_forget ()
+    horses ()
+    evilsquaressetup ()
+    evilsquares ()
+
+
+sizebutton = 30
+Tiggersbutton = Button (giraffe, bg="blue", command=frogs, height=sizebutton, width=sizebutton * 2)
+Tiggersbutton.place (x=xgiraffe / 3, y=ygiraffe / 3)
+donkeyponkey = Label (giraffe, text="CIRCLE ATTACK", )
+donkeyponkey.place (x=xgiraffe / 3 + 150, y=ygiraffe / 3 + 200)
+
+giraffe.mainloop ()
