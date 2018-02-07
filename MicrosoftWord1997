@@ -1,0 +1,13 @@
+from Tkinter import *
+MicrosoftWord=Tk()
+MicrosoftWord.geometry("1024x768")
+MicrosoftWord.title("Microsoft Word 1997")
+Microsoftfonts="Times New Roman"
+MicrosoftBUI="Bold"#Bold, Underline, Italicize
+#18 toolbars
+fontsize=12
+MicrosoftCanvas=Canvas(MicrosoftWord, height=768, width=1024)
+MicrosoftCanvas.place(x=0,y=0)
+MicrosoftText=Text(MicrosoftCanvas, height=768-300, width=1024-300)
+MicrosoftText.place(x=300, y=300)
+MicrosoftWord.mainloop()
