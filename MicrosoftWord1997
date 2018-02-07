@@ -1,0 +1,19 @@
+from Tkinter import *
+MicrosoftWord=Tk()
+MicrosoftWord.geometry("1024x768")
+MicrosoftWord.title("Microsoft Word 1997")
+fontcolors="Blue"
+highlightcolors="Yellow"
+Microsoftfonts="Times New Roman"
+MicrosoftBUI="Bold"#Bold, Underline, Italicize
+#font, text, save, fontsize, fontcolor, highlight?, scrollbar, Clippy,  Ruler?
+fontsize=12
+MicrosoftCanvas=Canvas(MicrosoftWord, height=768, width=1024)
+MicrosoftCanvas.place(x=0,y=0)
+MicrosoftText=Text(MicrosoftCanvas, height=768, width=1024, fg=fontcolors, )
+MicrosoftText.place(x=0, y=200)
+Save=PhotoImage("", height=20, width=10)
+#Save.place()
+MicrosoftBackground=PhotoImage("", height=666, width=666)
+#MicrosoftBackground.place(x=0,y=0)
+MicrosoftWord.mainloop()
