@@ -1,19 +1,68 @@
-from Tkinter import *
+from tkinter import *
 MicrosoftWord=Tk()
 MicrosoftWord.geometry("1024x768")
 MicrosoftWord.title("Microsoft Word 1997")
-fontcolors="Blue"
-highlightcolors="Yellow"
-Microsoftfonts="Times New Roman"
-MicrosoftBUI="Bold"#Bold, Underline, Italicize
 #font, text, save, fontsize, fontcolor, highlight?, scrollbar, Clippy,  Ruler?
-fontsize=12
 MicrosoftCanvas=Canvas(MicrosoftWord, height=768, width=1024)
 MicrosoftCanvas.place(x=0,y=0)
-MicrosoftText=Text(MicrosoftCanvas, height=768, width=1024, fg=fontcolors, )
-MicrosoftText.place(x=0, y=200)
-Save=PhotoImage("", height=20, width=10)
-#Save.place()
-MicrosoftBackground=PhotoImage("", height=666, width=666)
-#MicrosoftBackground.place(x=0,y=0)
+
+
+fontcolors="Blue"
+highlightcolors="Yellow"
+Microsoftfonts='Times New Roman'
+menu_barf = Menu(MicrosoftWord)
+fontmenu=Menu(menu_barf, tearoff=0)
+fontmenu.add_command(label='Times New Roman', command=MicrosoftWord.destroy)
+fontmenu.add_command(label='Ariel', command=MicrosoftWord.destroy)
+menu_barf.add_cascade(label="Fonts", menu=fontmenu)
+
+colormenu=Menu(menu_barf, tearoff=0)
+colormenu.add_command(label='Purple', command=MicrosoftWord.destroy)
+colormenu.add_command(label='Blue', command=MicrosoftWord.destroy)
+menu_barf.add_cascade(label="Colors", menu=colormenu)
+MicrosoftWord.config(menu=menu_barf)
+MicrosoftBUI=("bold", "underline", "italic", "normal")#Bold, Underline, Italics
+BUInum=3
+fontsize=12
+
+def bbold():
+    global MicrosoftCanvas, MicrosoftBUI, Microsoftfonts, MicrosoftBackground, MicrosoftText, fontcolors, fontsize, BUInum
+    if BUInum==3:
+        BUInum==0
+    else:
+        BUInum=BUInum, 0
+
+def uunder():
+    global MicrosoftCanvas, MicrosoftBUI, Microsoftfonts, MicrosoftBackground, MicrosoftText, fontcolors, fontsize, BUInum
+    if BUInum==3:
+        BUInum==1
+    else:
+        BUInum=BUInum, 1
+
+def iitalic():
+    global MicrosoftCanvas, MicrosoftBUI, Microsoftfonts, MicrosoftBackground, MicrosoftText, fontcolors, fontsize, BUInum
+    if BUInum==3:
+        BUInum==2
+    else:
+        BUInum=BUInum, 2
+
+BoldButton = Button (MicrosoftCanvas, command=bbold)
+BoldButton.place (x=50, y=50)
+UnderlineButton=Button(MicrosoftCanvas, command=uunder)
+UnderlineButton.place(x=70,y=50)
+ItalicButton=Button(MicrosoftCanvas, command=iitalic)
+ItalicButton.place(x=90,y=50)
+
+MicrosoftText = Text (MicrosoftCanvas, height=768, width=1024, fg=fontcolors,
+                      font=(Microsoftfonts, fontsize, MicrosoftBUI[BUInum]))
+MicrosoftText.place (x=0, y=200)
+
+Save=PhotoImage(file="150.png", height=20, width=10)
+Save2=MicrosoftCanvas.create_image(4, 4, image=Save)
+
+MicrosoftBackground=PhotoImage(file="150.png")
+Background= MicrosoftCanvas.create_image (200,100, image=MicrosoftBackground)
+
+MScrollbar=Scrollbar(MicrosoftCanvas, )
+MScrollbar.place(x=1000, y=0, height=768)
 MicrosoftWord.mainloop()
