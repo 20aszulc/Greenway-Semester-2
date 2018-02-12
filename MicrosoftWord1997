@@ -16,9 +16,38 @@ fontmenu.add_command(label='Times New Roman', command=MicrosoftWord.destroy)
 fontmenu.add_command(label='Ariel', command=MicrosoftWord.destroy)
 menu_barf.add_cascade(label="Fonts", menu=fontmenu)
 
+def colorblue():
+    global fontcolors
+    fontcolors="Blue"
+
+def colorpurple():
+    global fontcolors
+    fontcolors="Purple"
+
+def colorred():
+    global fontcolors
+    fontcolors="Red"
+
+def colorgreen():
+    global fontcolors
+    fontcolors="Green"
+
+def colorblack():
+    global fontcolors
+    fontcolors="Black"
+
+def colorpink():
+    global fontcolors
+    fontcolors="Pink"
+
 colormenu=Menu(menu_barf, tearoff=0)
-colormenu.add_command(label='Purple', command=MicrosoftWord.destroy)
-colormenu.add_command(label='Blue', command=MicrosoftWord.destroy)
+colormenu.add_command(label='Purple', command=colorpurple)
+colormenu.add_command(label='Blue', command=colorblue)
+colormenu.add_command(label='Red', command=colorred)
+colormenu.add_command(label='Green', command=colorgreen)
+colormenu.add_command(label='Black', command=colorblack)
+colormenu.add_command(label='Pink', command=colorpink)
+colormenu.add_command(label='Quit', command=MicrosoftWord.destroy)
 menu_barf.add_cascade(label="Colors", menu=colormenu)
 MicrosoftWord.config(menu=menu_barf)
 MicrosoftBUI=("bold", "underline", "italic", "normal")#Bold, Underline, Italics
