@@ -6,14 +6,31 @@ MicrosoftWord.title("Microsoft Word 1997")
 MicrosoftCanvas=Canvas(MicrosoftWord, height=768, width=1024)
 MicrosoftCanvas.place(x=0,y=0)
 
+def Microsoftfont1():
+    global Microsoftfonts
+    Microsoftfonts="Times New Roman"
 
-fontcolors="Blue"
+def Microsoftfont2():
+    global Microsoftfonts
+    Microsoftfonts="Ariel"
+
+def Microsoftfont3():
+    global Microsoftfonts
+    Microsoftfonts="Helvetica"
+
+def Microsoftfont4():
+    global Microsoftfonts
+    Microsoftfonts="Symbol"
+
+fontcolors="Black"
 highlightcolors="Yellow"
 Microsoftfonts='Times New Roman'
 menu_barf = Menu(MicrosoftWord)
 fontmenu=Menu(menu_barf, tearoff=0)
-fontmenu.add_command(label='Times New Roman', command=MicrosoftWord.destroy)
-fontmenu.add_command(label='Ariel', command=MicrosoftWord.destroy)
+fontmenu.add_command(label='Times New Roman', command=Microsoftfont1)
+fontmenu.add_command(label='Ariel', command=Microsoftfont2)
+fontmenu.add_command(label='Helvetica', command=Microsoftfont3)
+fontmenu.add_command(label='Symbol', command=Microsoftfont4)
 menu_barf.add_cascade(label="Fonts", menu=fontmenu)
 
 def colorblue():
@@ -57,23 +74,28 @@ fontsize=12
 def bbold():
     global MicrosoftCanvas, MicrosoftBUI, Microsoftfonts, MicrosoftBackground, MicrosoftText, fontcolors, fontsize, BUInum
     if BUInum==3:
-        BUInum==0
+        BUInum=0
     else:
-        BUInum=BUInum, 0
+        BUInum= 0
 
 def uunder():
     global MicrosoftCanvas, MicrosoftBUI, Microsoftfonts, MicrosoftBackground, MicrosoftText, fontcolors, fontsize, BUInum
     if BUInum==3:
-        BUInum==1
+        BUInum=1
     else:
-        BUInum=BUInum, 1
+        BUInum= 1
 
 def iitalic():
     global MicrosoftCanvas, MicrosoftBUI, Microsoftfonts, MicrosoftBackground, MicrosoftText, fontcolors, fontsize, BUInum
     if BUInum==3:
-        BUInum==2
+        BUInum=2
+        print(BUInum)
     else:
-        BUInum=BUInum, 2
+        BUInum= 2
+        print(BUInum)
+    MicrosoftText = Text (MicrosoftCanvas, height=768, width=1024, fg=fontcolors,
+                          font=(Microsoftfonts, fontsize, MicrosoftBUI[BUInum]))
+    MicrosoftText.place (x=0, y=200)
 
 BoldButton = Button (MicrosoftCanvas, command=bbold)
 BoldButton.place (x=50, y=50)
@@ -86,11 +108,20 @@ MicrosoftText = Text (MicrosoftCanvas, height=768, width=1024, fg=fontcolors,
                       font=(Microsoftfonts, fontsize, MicrosoftBUI[BUInum]))
 MicrosoftText.place (x=0, y=200)
 
-Save=PhotoImage(file="150.png", height=20, width=10)
-Save2=MicrosoftCanvas.create_image(4, 4, image=Save)
+def Works():
+    MicrosoftText = Text (MicrosoftCanvas, height=768, width=1024, fg=fontcolors,
+                      font=(Microsoftfonts, fontsize, MicrosoftBUI[BUInum]))
+    MicrosoftText.place (x=0, y=200)
 
-MicrosoftBackground=PhotoImage(file="150.png")
-Background= MicrosoftCanvas.create_image (200,100, image=MicrosoftBackground)
+ChangeStuff = Button (MicrosoftCanvas, command=Works)
+ChangeStuff.place (x=500, y=50)
+
+
+#Save=PhotoImage(file="150.png", height=20, width=10)
+#Save2=MicrosoftCanvas.create_image(4, 4, image=Save)
+
+#MicrosoftBackground=PhotoImage(file="150.png")
+#Background= MicrosoftCanvas.create_image (200,100, image=MicrosoftBackground)
 
 MScrollbar=Scrollbar(MicrosoftCanvas, )
 MScrollbar.place(x=1000, y=0, height=768)
