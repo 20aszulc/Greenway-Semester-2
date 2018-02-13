@@ -8,6 +8,7 @@ MicrosoftCanvas=Canvas(MicrosoftWord, height=768, width=1024, )
 MicrosoftCanvas.place(x=0,y=0)
 
 foont=0
+inpput=0
 fontmenu = Listbox (MicrosoftWord)
 Listboxbutton=Button(MicrosoftWord, bg="White", height=1, width=30,)
 
@@ -40,8 +41,10 @@ Listboxbutton=Button(MicrosoftWord, bg="White", height=1, width=30, text=Microso
 Listboxbutton.place(x=165, y=80)
 
 def delete():
-    MicrosoftText = Text (MicrosoftCanvas, height=768, width=1024, fg=fontcolors,
-                      font=(Microsoftfonts, fontsize, MicrosoftBUI[BUInum]))
+    global inpput
+    inpput=1
+    MicrosoftText = Text (MicrosoftCanvas, height=28, width=200, fg=fontcolors,
+                          font=(Microsoftfonts, fontsize, MicrosoftBUI[BUInum]))
     MicrosoftText.place (x=0, y=152)
 
 menu_barf = Menu(MicrosoftWord)
@@ -97,6 +100,10 @@ def colorpink():
     global fontcolors
     fontcolors="Pink"
 
+def coloryellow():
+    global fontcolors
+    fontcolors="Cyan"
+
 colormenu=Menu(menu_barf, tearoff=0)
 colormenu.add_command(label='Purple', command=colorpurple)
 colormenu.add_command(label='Blue', command=colorblue)
@@ -104,6 +111,7 @@ colormenu.add_command(label='Red', command=colorred)
 colormenu.add_command(label='Green', command=colorgreen)
 colormenu.add_command(label='Black', command=colorblack)
 colormenu.add_command(label='Pink', command=colorpink)
+colormenu.add_command(label='Cyan', command=coloryellow)
 menu_barf.add_cascade(label="Colors", menu=colormenu)
 MicrosoftWord.config(menu=menu_barf)
 MicrosoftBUI=("bold", "underline", "italic", "normal")#Bold, Underline, Italics
@@ -140,15 +148,19 @@ UnderlineButton.place(x=515,y=80)
 ItalicButton=Button(MicrosoftCanvas, command=iitalic, )
 ItalicButton.place(x=485,y=80)
 
-MicrosoftText = Text (MicrosoftCanvas, height=768, width=1024, fg=fontcolors,
-                      font=("Times New Roman", 12, "normal"))
+MicrosoftText = Text (MicrosoftCanvas, height=28, width=200, fg=fontcolors,
+                      font=("Times New Roman", 12, "normal"),  wrap=CHAR)
 MicrosoftText.place (x=0, y=152)
 
 def Works():
-    global MicrosoftText
-    input=MicrosoftText.get("1.0",'end-1c') #https://stackoverflow.com/questions/14824163/how-to-get-the-input-from-the-tkinter-text-box-widget
-    MicrosoftText = Text (MicrosoftCanvas, height=768, width=1024, fg=fontcolors,
-                      font=(Microsoftfonts, fontsize, MicrosoftBUI[BUInum]))
+    global MicrosoftText, inpput
+    if inpput==0:
+        input=MicrosoftText.get("1.0",'end-1c') #https://stackoverflow.com/questions/14824163/how-to-get-the-input-from-the-tkinter-text-box-widget
+    if inpput==1:
+        input=""
+        inpput=0
+    MicrosoftText = Text (MicrosoftCanvas, height=28, width=200, fg=fontcolors,
+                          font=(Microsoftfonts, fontsize, MicrosoftBUI[BUInum]), wrap=CHAR)
     MicrosoftText.insert (END, input)
     MicrosoftText.place (x=0, y=152)
     MScrollbar = Scrollbar (MicrosoftCanvas, )
