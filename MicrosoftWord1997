@@ -3,35 +3,75 @@ MicrosoftWord=Tk()
 MicrosoftWord.geometry("1024x768")
 MicrosoftWord.title("Microsoft Word 1997")
 #font, text, save, fontsize, fontcolor, highlight?, scrollbar, Clippy,  Ruler?
-MicrosoftCanvas=Canvas(MicrosoftWord, height=768, width=1024)
+
+MicrosoftCanvas=Canvas(MicrosoftWord, height=768, width=1024, )
 MicrosoftCanvas.place(x=0,y=0)
 
-def Microsoftfont1():
-    global Microsoftfonts
-    Microsoftfonts="Times New Roman"
+foont=0
+fontmenu = Listbox (MicrosoftWord)
+Listboxbutton=Button(MicrosoftWord, bg="White", height=1, width=30,)
 
-def Microsoftfont2():
-    global Microsoftfonts
-    Microsoftfonts="Ariel"
-
-def Microsoftfont3():
-    global Microsoftfonts
-    Microsoftfonts="Helvetica"
-
-def Microsoftfont4():
-    global Microsoftfonts
-    Microsoftfonts="Symbol"
+def Microsoftfoont():
+    global Microsoftfonts, foont, Listboxbutton
+    foont=foont+1
+    if foont!=1:
+        fontmenu.insert (2, 'Times New Roman')
+        fontmenu.insert (3, 'Ariel', )
+        fontmenu.insert (4, 'Helvetica', )
+        fontmenu.insert (5, 'Symbol', )
+        fontmenu.place (x=165, y=110)
+        hi=fontmenu.get(ACTIVE) #http://effbot.org/tkinterbook/listbox.htm#Tkinter.Listbox.curselection-method
+        Microsoftfonts = hi
+        Listboxbutton.place_forget ()
+        Listboxbutton = Button (MicrosoftWord, bg="White", height=1, width=30, text=Microsoftfonts,
+                                command=Microsoftfoont)
+        Listboxbutton.place (x=165, y=80)
+        Microsoftfonts = hi
+    if foont%2==1:
+        fontmenu.delete(0, END)
+        fontmenu.place_forget()
 
 fontcolors="Black"
 highlightcolors="Yellow"
 Microsoftfonts='Times New Roman'
+
+
+Listboxbutton=Button(MicrosoftWord, bg="White", height=1, width=30, text=Microsoftfonts, command=Microsoftfoont)
+Listboxbutton.place(x=165, y=80)
+
+def delete():
+    MicrosoftText = Text (MicrosoftCanvas, height=768, width=1024, fg=fontcolors,
+                      font=(Microsoftfonts, fontsize, MicrosoftBUI[BUInum]))
+    MicrosoftText.place (x=0, y=152)
+
 menu_barf = Menu(MicrosoftWord)
-fontmenu=Menu(menu_barf, tearoff=0)
-fontmenu.add_command(label='Times New Roman', command=Microsoftfont1)
-fontmenu.add_command(label='Ariel', command=Microsoftfont2)
-fontmenu.add_command(label='Helvetica', command=Microsoftfont3)
-fontmenu.add_command(label='Symbol', command=Microsoftfont4)
-menu_barf.add_cascade(label="Fonts", menu=fontmenu)
+filemenu=Menu(menu_barf, tearoff=0)
+filemenu.add_command(label='Quit', command=MicrosoftWord.destroy)
+menu_barf.add_cascade(label="File", menu=filemenu)
+editmenu=Menu(menu_barf, tearoff=0)
+editmenu.add_command(label='Delete all', command=delete)
+menu_barf.add_cascade(label="Edit", menu=editmenu)
+viewmenu=Menu(menu_barf, tearoff=0)
+viewmenu.add_command(label='Nothing',)
+menu_barf.add_cascade(label="View", menu=viewmenu)
+insertmenu=Menu(menu_barf, tearoff=0)
+insertmenu.add_command(label='Nothing',)
+menu_barf.add_cascade(label="Insert", menu=insertmenu)
+formatmenu=Menu(menu_barf, tearoff=0)
+formatmenu.add_command(label='Nothing',)
+menu_barf.add_cascade(label="Format", menu=formatmenu)
+toolmenu=Menu(menu_barf, tearoff=0)
+toolmenu.add_command(label='Nothing',)
+menu_barf.add_cascade(label="Tools", menu=toolmenu)
+tablemenu=Menu(menu_barf, tearoff=0)
+tablemenu.add_command(label='Nothing',)
+menu_barf.add_cascade(label="Table", menu=tablemenu)
+windowmenu=Menu(menu_barf, tearoff=0)
+windowmenu.add_command(label='Nothing',)
+menu_barf.add_cascade(label="Window", menu=windowmenu)
+helpmenu=Menu(menu_barf, tearoff=0)
+helpmenu.add_command(label="You don't get any",)
+menu_barf.add_cascade(label="Help", menu=helpmenu)
 
 def colorblue():
     global fontcolors
@@ -64,7 +104,6 @@ colormenu.add_command(label='Red', command=colorred)
 colormenu.add_command(label='Green', command=colorgreen)
 colormenu.add_command(label='Black', command=colorblack)
 colormenu.add_command(label='Pink', command=colorpink)
-colormenu.add_command(label='Quit', command=MicrosoftWord.destroy)
 menu_barf.add_cascade(label="Colors", menu=colormenu)
 MicrosoftWord.config(menu=menu_barf)
 MicrosoftBUI=("bold", "underline", "italic", "normal")#Bold, Underline, Italics
@@ -93,35 +132,38 @@ def iitalic():
     else:
         BUInum= 2
         print(BUInum)
-    MicrosoftText = Text (MicrosoftCanvas, height=768, width=1024, fg=fontcolors,
-                          font=(Microsoftfonts, fontsize, MicrosoftBUI[BUInum]))
-    MicrosoftText.place (x=0, y=200)
 
-BoldButton = Button (MicrosoftCanvas, command=bbold)
-BoldButton.place (x=50, y=50)
-UnderlineButton=Button(MicrosoftCanvas, command=uunder)
-UnderlineButton.place(x=70,y=50)
-ItalicButton=Button(MicrosoftCanvas, command=iitalic)
-ItalicButton.place(x=90,y=50)
+BoldButton = Button (MicrosoftCanvas, command=bbold, )
+BoldButton.place (x=445, y=80)
+UnderlineButton=Button(MicrosoftCanvas, command=uunder, )
+UnderlineButton.place(x=515,y=80)
+ItalicButton=Button(MicrosoftCanvas, command=iitalic, )
+ItalicButton.place(x=485,y=80)
 
 MicrosoftText = Text (MicrosoftCanvas, height=768, width=1024, fg=fontcolors,
-                      font=(Microsoftfonts, fontsize, MicrosoftBUI[BUInum]))
-MicrosoftText.place (x=0, y=200)
+                      font=("Times New Roman", 12, "normal"))
+MicrosoftText.place (x=0, y=152)
 
 def Works():
+    global MicrosoftText
+    input=MicrosoftText.get("1.0",'end-1c') #https://stackoverflow.com/questions/14824163/how-to-get-the-input-from-the-tkinter-text-box-widget
     MicrosoftText = Text (MicrosoftCanvas, height=768, width=1024, fg=fontcolors,
                       font=(Microsoftfonts, fontsize, MicrosoftBUI[BUInum]))
-    MicrosoftText.place (x=0, y=200)
+    MicrosoftText.insert (END, input)
+    MicrosoftText.place (x=0, y=152)
+    MScrollbar = Scrollbar (MicrosoftCanvas, )
+    MScrollbar.place (x=1000, y=0, height=768)
 
-ChangeStuff = Button (MicrosoftCanvas, command=Works)
-ChangeStuff.place (x=500, y=50)
+ChangeStuff = Button (MicrosoftCanvas, command=Works, width=2, bg="Lightgreen", text="Go!")
+ChangeStuff.place (x=0, y=120)
 
 
 #Save=PhotoImage(file="150.png", height=20, width=10)
 #Save2=MicrosoftCanvas.create_image(4, 4, image=Save)
 
-#MicrosoftBackground=PhotoImage(file="150.png")
-#Background= MicrosoftCanvas.create_image (200,100, image=MicrosoftBackground)
+
+MicrosoftBackground=PhotoImage(file="background.png")
+Background= MicrosoftCanvas.create_image (510,380, image=MicrosoftBackground)
 
 MScrollbar=Scrollbar(MicrosoftCanvas, )
 MScrollbar.place(x=1000, y=0, height=768)
